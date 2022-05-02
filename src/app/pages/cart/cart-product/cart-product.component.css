@@ -1,0 +1,52 @@
+div, img, p {
+  margin: 0;
+  padding: 0;
+}
+
+.product-name {
+  padding-bottom: 1em;
+  min-height: 4.9em;
+  max-height: 4.9em;
+  overflow: hidden;
+}
+
+.list-view {
+  padding: 0.2vw 1vw;
+  display: grid;
+}
+
+.basket-image {
+  max-height: 5em;
+  max-width: 5em;
+  min-height: 5em;
+  min-width: 5em;
+}
+
+.btn-group {
+  max-width: 6em;
+  min-width: 6em;
+}
+
+@media screen and (max-width: 415px) {
+  .list-view {
+    display: flow;
+  }
+
+  .product-name {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1000px){
+  .product-name {
+    max-width: 20em;
+    min-width: 20em;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .product-name {
+    max-width: 30em;
+    min-width: 30em;
+  }
+}

@@ -1,0 +1,22 @@
+<body>
+
+<app-header></app-header>
+
+<div class="album py-5">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+      <div class="col" *ngFor="let product of products">
+        <app-catalog-product [product]="product"
+                             [numberInCart]="cartProducts.get(product.productId) ?? 0"
+                             (addEvent)="addProductToCart(product.productId)"
+                             (removeEvent)="removeProductFromCart(product.productId)"></app-catalog-product>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+</body>

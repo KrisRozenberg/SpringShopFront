@@ -1,0 +1,36 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  height: inherit;
+}
+
+.list-view {
+  padding: 0.2vw 1vw;
+  display: grid;
+}
+
+.p {
+  align-content: center;
+  font-size: larger;
+}
+
+.product-name {
+  padding-bottom: 1em;
+  min-height: 4.9em;
+  max-height: 4.9em;
+  overflow: hidden;
+}
+
+.available-product {
+  min-height: 3.2em;
+  max-height: 3.2em;
+}
+
+@media screen and (max-width: 300px) {
+  .list-view {
+    display: inline;
+  }
+}

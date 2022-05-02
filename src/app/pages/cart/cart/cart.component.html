@@ -1,0 +1,27 @@
+<body>
+
+<app-header></app-header>
+
+<div class="container">
+  <table class="table">
+      <tbody>
+      <tr *ngFor="let product of products">
+
+          <app-cart-product class="basket" *ngIf="cartProducts.has(product.productId)"
+                            [product]="product"
+                            [numberInCart]="cartProducts.get(product.productId) ?? 0"
+                            (addEvent)="addProductToCart(product.productId)"
+                            (removeEvent)="removeProductFromCart(product.productId)"></app-cart-product>
+
+      </tr>
+      </tbody>
+  </table>
+  <br>
+
+  <app-unsigned-order-form (confirmOrderEvent)="makeOrder($event)"></app-unsigned-order-form>
+
+</div>
+
+  <app-footer></app-footer>
+
+</body>
