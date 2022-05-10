@@ -1,0 +1,12 @@
+.switch {
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  display: flex;
+}
+
+.form-check {
+  padding-left: 0.5em;
+}
+
+.form-check-label {
+  padding-right: 3em;
+}

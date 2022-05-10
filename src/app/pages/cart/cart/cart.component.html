@@ -18,7 +18,9 @@
   </table>
   <br>
 
-  <app-unsigned-order-form (confirmOrderEvent)="makeOrder($event)"></app-unsigned-order-form>
+  <app-unsigned-order-form [orderInProcessMessage]="orderInProcessMessage"
+                           [serviceValidationErrors]="serviceValidationErrors"
+                           (confirmOrderEvent)="makeOrder($event)"></app-unsigned-order-form>
 
 </div>
 

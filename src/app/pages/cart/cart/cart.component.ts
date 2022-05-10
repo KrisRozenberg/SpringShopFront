@@ -5,7 +5,9 @@ import {ProductService} from "../../../services/product.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Order} from "../../../dto/order";
 import {OrderService} from "../../../services/order.service";
-import {OrderInfo} from "../../../dto/orderInfo";
+import {OrderInfo} from "../../../dto/order-info";
+import {catchError, Observable} from "rxjs";
+import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +17,8 @@ import {OrderInfo} from "../../../dto/orderInfo";
 export class CartComponent implements OnInit {
   products: Product[];
   cartProducts:  Map<number, number>;
+  orderInProcessMessage: string;
+  serviceValidationErrors: String[];
 
   constructor(private productService: ProductService,
               private cartProductService: CartProductService,
@@ -48,12 +52,13 @@ export class CartComponent implements OnInit {
     orderInfo.productQuantity = this.cartProducts;
 
     this.orderService.makeOrder(orderInfo).subscribe(
-      (response: Order) => {
-        console.log("Created order", response);
+      () => {
+        this.serviceValidationErrors = [];
+        this.orderInProcessMessage = "Your order is in process!";
         this.cartProducts.clear();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.serviceValidationErrors = error.error.errors;
       }
     );
   }

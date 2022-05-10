@@ -1,26 +1,50 @@
-<form (ngSubmit)="confirmOrder()">
+<div>{{orderInProcessMessage}}</div>
+<div *ngFor="let message of serviceValidationErrors">{{message}}</div>
+<br/>
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
   <div class="row col-md-12">
+
+    <div class="mb-3 form-check form-switch">
+      <div class="switch">
+        <label class="form-check-label" for="flexSwitchCheckChecked">Доставка (5.00 руб.)</label>
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" formControlName="isDelivery" checked>
+      </div>
+    </div>
+
     <div class="input-group mb-3">
       <span class="input-group-text">Имя и фамилия</span>
-      <input type="text" name="name" class="form-control" [(ngModel)] = "orderInfo.name">
-      <input type="text" name="surname" class="form-control" [(ngModel)] = "orderInfo.surname">
+      <input type="text" name="name" class="form-control" formControlName="name">
+      <input type="text" name="surname" class="form-control" formControlName="surname">
     </div>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text">Адрес</span>
-      <input type="text" class="form-control" name="address" aria-describedby="inputGroup-sizing-default" [(ngModel)] = "orderInfo.address">
+      <div *ngIf="isControlInvalid('name')">Пожалуйста, введите имя! Имя должно содержать менее 30 символов.</div>
+      <div *ngIf="isControlInvalid('surname')">Пожалуйста, введите фамилию! Фамилия должна содержать менее 30 символов.</div>
+
+    <div *ngIf="orderForm.controls['isDelivery'].value">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Адрес</span>
+        <input type="text" class="form-control" name="address" aria-describedby="inputGroup-sizing-default" formControlName="address">
+      </div>
+
+      <div *ngIf="isControlInvalid('address')">Пожалуйста, введите адрес! Адрес должен содержать менее 100 символов.</div>
     </div>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text">Способ доставки</span>
-      <select class="form-select" name="receivingWay" [(ngModel)] = "orderInfo.receivingWay">
-        <option value="Доставка (5.00 руб.)">Доставка (5.00 руб.)</option>
-        <option value="Самовывоз из магазина по адресу такому-то">Самовывоз из магазина по адресу такому-то (бесплатно)</option>
-      </select>
+    <div *ngIf="!orderForm.controls['isDelivery'].value">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Адрес</span>
+        <select class="form-select" name="address" formControlName="address">
+          <option value="Самовывоз из магазина по адресу 2">Самовывоз из магазина по адресу 1</option>
+          <option value="Самовывоз из магазина по адресу 1">Самовывоз из магазина по адресу 2</option>
+        </select>
+      </div>
+
+      <div *ngIf="isControlInvalid('address')">Выберите адрес магазина!</div>
     </div>
+
   </div>
 
   <div class="col-12 ">
     <button class="btn btn-primary mt-4" type="submit">Подтвердить и оформить заказ</button>
   </div>
 </form>
+

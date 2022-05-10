@@ -12,7 +12,7 @@ import { CatalogComponent } from './pages/catalog/catalog/catalog.component';
 import {RouterModule} from "@angular/router";
 import {CartProductService} from "./services/cart-product.service";
 import { CartProductComponent } from './pages/cart/cart-product/cart-product.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UnsignedOrderFormComponent } from './pages/cart/unsigned-order-form/unsigned-order-form.component';
 
 @NgModule({
@@ -29,6 +29,7 @@ import { UnsignedOrderFormComponent } from './pages/cart/unsigned-order-form/uns
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: CatalogComponent },
