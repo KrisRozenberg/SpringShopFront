@@ -1,0 +1,35 @@
+.table-col {
+  display: flex;
+  justify-content: space-between;
+}
+
+.six-width {
+  max-width: 6em;
+  min-width: 6em;
+}
+
+.fifteen-width {
+  max-width: 15em;
+  min-width: 15em;
+}
+
+.twenty-width {
+  max-width: 25em;
+  min-width: 25em;
+}
+
+@media screen and (max-width: 415px) {
+  .not-important {
+    display: none;
+  }
+
+  .date {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 415px) and (max-width: 1000px){
+  .not-important {
+    display: none;
+  }
+}

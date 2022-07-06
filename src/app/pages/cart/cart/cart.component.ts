@@ -5,9 +5,11 @@ import {ProductService} from "../../../services/product.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Order} from "../../../dto/order";
 import {OrderService} from "../../../services/order.service";
-import {OrderInfo} from "../../../dto/order-info";
+import {UnsignedOrderInfo} from "../../../dto/unsigned-order-info";
 import {catchError, Observable} from "rxjs";
 import {error} from "@angular/compiler/src/util";
+import {UserService} from "../../../services/user.service";
+import {SignedInOrderInfo} from "../../../dto/signed-in-order-info";
 
 @Component({
   selector: 'app-cart',
@@ -19,14 +21,17 @@ export class CartComponent implements OnInit {
   cartProducts:  Map<number, number>;
   orderInProcessMessage: string;
   serviceValidationErrors: String[];
+  userInfo: any;
 
   constructor(private productService: ProductService,
               private cartProductService: CartProductService,
-              private orderService: OrderService) { }
+              private orderService: OrderService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.getProducts();
     this.cartProducts = this.cartProductService.getCartProducts();
+    this.userInfo = this.userService.getUserInfo();
   }
 
   public getProducts(): void {
@@ -48,10 +53,27 @@ export class CartComponent implements OnInit {
     this.cartProductService.removeProductFromCart(key);
   }
 
-  public makeOrder(orderInfo: OrderInfo): void {
+  public makeUnsignedOrder(orderInfo: UnsignedOrderInfo): void {
     orderInfo.productQuantity = this.cartProducts;
 
-    this.orderService.makeOrder(orderInfo).subscribe(
+    this.orderService.makeUnsignedOrder(orderInfo).subscribe(
+      () => {
+        this.serviceValidationErrors = [];
+        this.orderInProcessMessage = "Your order is in process!";
+        this.cartProducts.clear();
+      },
+      (error: HttpErrorResponse) => {
+        this.serviceValidationErrors = error.error.errors;
+      }
+    );
+  }
+
+  public makeSignedInOrder(orderInfo: SignedInOrderInfo): void {
+    orderInfo.productQuantity = this.cartProducts;
+    orderInfo.login = this.userInfo.login;
+    let token = "Bearer_" + this.userInfo.access_token;
+
+    this.orderService.makeSignedInOrder(orderInfo, token).subscribe(
       () => {
         this.serviceValidationErrors = [];
         this.orderInProcessMessage = "Your order is in process!";

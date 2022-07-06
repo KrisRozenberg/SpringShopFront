@@ -2,15 +2,38 @@
   <a class="title-link" routerLink="/"><h2>CraftShop</h2></a>
 
   <div class="row">
-    <div class="col btn-group">
-      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Ваш профиль
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" routerLink="/cart">Корзина</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Войти</a></li>
-      </ul>
+
+    <div *ngIf="userInfo; else guest" class="col btn-group">
+      <div *ngIf="userInfo.role == 'CLIENT'; else admin" class="col btn-group">
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          {{userInfo.login}}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/cart">Корзина</a></li>
+          <li><a class="dropdown-item" routerLink="/orderList">Мои заказы</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><button class="dropdown-item" (click)="logout()">Выйти</button></li>
+        </ul>
+      </div>
+
+      <ng-template #admin class="col btn-group">
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          {{userInfo.login}}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/orderList">Список заказов</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><button class="dropdown-item" (click)="logout()">Выйти</button></li>
+        </ul>
+      </ng-template>
     </div>
+
+    <ng-template #guest>
+      <div class="guest-header">
+        <a routerLink="/cart" class="btn btn-outline-primary btn-sm">Корзина</a>
+        <a routerLink="/login" class="btn btn-outline-primary btn-sm">Войти</a>
+      </div>
+    </ng-template>
+
   </div>
 </header>

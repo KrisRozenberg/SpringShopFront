@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OrderInfo} from "../../../dto/order-info";
+import {UnsignedOrderInfo} from "../../../dto/unsigned-order-info";
 import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 
 @Component({
@@ -9,9 +9,9 @@ import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/for
 })
 export class UnsignedOrderFormComponent implements OnInit {
   orderForm: FormGroup;
-  orderInfo: OrderInfo;
+  orderInfo: UnsignedOrderInfo;
   @Output()
-  confirmOrderEvent = new EventEmitter<OrderInfo>();
+  confirmOrderEvent = new EventEmitter<UnsignedOrderInfo>();
   @Input()
   orderInProcessMessage: string;
   @Input()
@@ -58,9 +58,8 @@ export class UnsignedOrderFormComponent implements OnInit {
     const surname = this.orderForm.controls['surname'].value;
     const isDelivery = this.orderForm.controls['isDelivery'].value;
     const address = this.orderForm.controls['address'].value;
-    this.orderInfo = new OrderInfo(name, surname, isDelivery, address);
+    this.orderInfo = new UnsignedOrderInfo(name, surname, isDelivery, address);
 
     this.confirmOrderEvent.emit(this.orderInfo);
   }
-
 }

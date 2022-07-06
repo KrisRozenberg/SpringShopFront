@@ -1,0 +1,32 @@
+<body>
+
+<app-header></app-header>
+
+<div class="container">
+  <table class="table">
+    <tbody>
+    <tr class="table-col">
+      <th scope="col">#</th>
+      <th scope="col" class="six-width date">Дата</th>
+      <th scope="col" class="twenty-width not-important">Адрес</th>
+      <th scope="col" class="six-width not-important">Стоимость</th>
+      <th scope="col" class="fifteen-width">Статус</th>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <tbody>
+    <tr *ngFor="let order of orders">
+
+      <app-order class="table-col" [order]="order"
+                 [userInfo]="userInfo"></app-order>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-footer></app-footer>
+
+</body>

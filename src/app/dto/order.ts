@@ -1,5 +1,5 @@
 export class Order {
-  orderId: bigint;
+  orderId: number;
   date: any;
   price: number;
   address: string;

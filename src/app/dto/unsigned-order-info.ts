@@ -1,4 +1,4 @@
-export class OrderInfo {
+export class UnsignedOrderInfo {
   name: string;
   surname: string;
   address: string;

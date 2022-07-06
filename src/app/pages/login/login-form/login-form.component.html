@@ -1,0 +1,27 @@
+<body>
+
+<app-header></app-header>
+
+<div class="container">
+  <br>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="row col-md-12">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Логин и пароль</span>
+        <input type="text" name="login" class="form-control" formControlName="login">
+        <input type="password" name="password" class="form-control" formControlName="password">
+      </div>
+
+      <div *ngIf="isControlInvalid('login')">Пожалуйста, введите логин! Логин должно содержать менее 25 символов.</div>
+      <div *ngIf="isControlInvalid('password')">Пожалуйста, введите пароль! Пароль должно содержать менее 60 символов.</div>
+    </div>
+
+    <div class="col-12 ">
+      <button class="btn btn-primary mt-4" type="submit">Войти</button>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>
+
+</body>

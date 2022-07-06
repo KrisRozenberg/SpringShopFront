@@ -18,9 +18,15 @@
   </table>
   <br>
 
-  <app-unsigned-order-form [orderInProcessMessage]="orderInProcessMessage"
-                           [serviceValidationErrors]="serviceValidationErrors"
-                           (confirmOrderEvent)="makeOrder($event)"></app-unsigned-order-form>
+  <app-signed-in-order-form *ngIf="userInfo; else unsigned" [orderInProcessMessage]="orderInProcessMessage"
+                            [serviceValidationErrors]="serviceValidationErrors"
+                            (confirmOrderEvent)="makeSignedInOrder($event)"></app-signed-in-order-form>
+
+  <ng-template #unsigned>
+    <app-unsigned-order-form [orderInProcessMessage]="orderInProcessMessage"
+                             [serviceValidationErrors]="serviceValidationErrors"
+                             (confirmOrderEvent)="makeUnsignedOrder($event)"></app-unsigned-order-form>
+  </ng-template>
 
 </div>
 

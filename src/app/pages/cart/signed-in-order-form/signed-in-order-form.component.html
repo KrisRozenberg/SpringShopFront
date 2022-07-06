@@ -11,15 +11,6 @@
       </div>
     </div>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text">Имя и фамилия</span>
-      <input type="text" name="name" class="form-control" formControlName="name">
-      <input type="text" name="surname" class="form-control" formControlName="surname">
-    </div>
-
-      <div *ngIf="isControlInvalid('name')">Пожалуйста, введите имя! Имя должно содержать менее 30 символов.</div>
-      <div *ngIf="isControlInvalid('surname')">Пожалуйста, введите фамилию! Фамилия должна содержать менее 30 символов.</div>
-
     <div *ngIf="orderForm.controls['isDelivery'].value">
       <div class="input-group mb-3">
         <span class="input-group-text">Адрес</span>
@@ -47,4 +38,3 @@
     <button class="btn btn-primary mt-4" type="submit">Подтвердить и оформить заказ</button>
   </div>
 </form>
-

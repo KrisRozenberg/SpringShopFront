@@ -1,0 +1,25 @@
+<th scope="row"><p>{{order.orderId}}</p></th>
+<td><p class="date six-width">{{order.date}}</p></td>
+<td><p class="not-important twenty-width">{{order.address}}</p></td>
+<td><p class="not-important six-width">Цена: {{order.price | number: '1.2'}}</p></td>
+<div class="fifteen-width" *ngIf="order.status == 'IN_PROCESS'; else notInProcess">
+  <div *ngIf="userInfo.role == 'CLIENT'; else admin">
+    <td><p>В процессе</p></td>
+    <td><button class="btn btn-primary btn-sm" (click)="rejectOrder()">Отклонить</button></td>
+  </div>
+
+  <ng-template #admin>
+    <td><p>В процессе</p></td>
+    <td><button class="btn btn-primary btn-sm" (click)="completeOrder()">Выполнено</button></td>
+  </ng-template>
+</div>
+
+<ng-template #notInProcess>
+  <td class="fifteen-width">
+    <p *ngIf="order.status == 'DONE'; else rejected">Выполнен</p>
+
+    <ng-template #rejected>
+      <p>Отклонён</p>
+    </ng-template>
+  </td>
+</ng-template>

@@ -16,6 +16,21 @@ header > a {
   text-decoration: none;
 }
 
-.dropdown-toggle {
-  min-width: 10rem;
+.dropdown-menu {
+  min-width: auto;
 }
+
+.guest-header > a {
+  margin: 1.2em 0.5em 1.2em 0;
+}
+
+@media screen and (max-width: 300px) {
+  .guest-header {
+    display: grid;
+  }
+
+  .guest-header > a {
+    margin: 0.2em 0  0.2em 0;
+  }
+}
+
